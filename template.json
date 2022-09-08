@@ -1,0 +1,27 @@
+[
+    {
+        "id_kios": 1,
+        "nama_barang": " ",
+        "kategori_barang": " ",
+        "harga_stok": 19000,
+        "harga_jual": 21000,
+        "deskripsi_barang": " ",
+        "stok_barang": 11,
+        "created_at": " ",
+        "updated_at": " ",
+        "expired_at": null
+    },
+    {
+        "id_kios": 1,
+        "nama_karyawan": " ",
+        "nama_lengkap_karyawan": " ",
+        "email_karyawan": " ",
+        "ponsel_karyawan": " ",
+        "jabatan_karyawan": " ",
+        "status_karyawan": " ",
+        "gaji_karyawan": 2500000,
+        "karyawan_image_url": "null",
+        "created_at": " ",
+        "updated_at": " "
+    }
+]

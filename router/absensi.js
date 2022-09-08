@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     res.send('Selamat datang di KiosKu')
 })
 
-//Get all karyawan data
+//Get all absensi data
 router.get('/getAllAbsensi', (req, res) => {
     connection.query("SELECT " + 
         "absensi.id, absensi.id_karyawan, karyawan.nama_lengkap_karyawan, karyawan.jabatan_karyawan, " +
