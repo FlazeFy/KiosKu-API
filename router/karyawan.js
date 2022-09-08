@@ -1,7 +1,6 @@
-//Leonardho R Sitanggang-1302194041
 const { response } = require('express')
 const express = require('express')
-const connection = require('./database')
+const connection = require('../database')
 const router = new express.Router()
 
 router.get('/', (req, res) => {
