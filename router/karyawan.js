@@ -13,7 +13,34 @@ router.get('/getAllKaryawan', (req, res) => {
         if (error) {
             res.status(500).send(error)
         } else {
-            res.status(200).json({ msg: "Data retrived", status: 200, data: rows })
+            res.status(200).json({ msg: rows.length + " Data retrived", status: 200, data: rows })
+        }
+    })
+})
+
+//Get karyawan data by id & nama lengkap karyawan
+router.get('/getKaryawan/:id/:nama_lengkap_karyawan', (req, res) => {
+    const id = req.params.id
+    const nama_lengkap_karyawan = req.params.nama_lengkap_karyawan
+    
+    connection.query('SELECT * FROM karyawan WHERE id like ? or nama_lengkap_karyawan like ?', ['%' + id + '%', '%' + nama_lengkap_karyawan + '%'], (error, rows, fields) => {
+        if (error) {
+            res.status(500).send(error)
+        } else {
+            res.status(200).json({ msg: rows.length + " Data retrived",status:200, data: rows })
+        }
+    })
+})
+
+//Get karyawan data by jabatan karyawan
+router.get('/getKaryawanJabatan/:jabatan_karyawan', (req, res) => {
+    const jabatan_karyawan = req.params.jabatan_karyawan
+    
+    connection.query('SELECT * FROM karyawan WHERE jabatan_karyawan = ?', [jabatan_karyawan], (error, rows, fields) => {
+        if (error) {
+            res.status(500).send(error)
+        } else {
+            res.status(200).json({ msg: rows.length + " " + jabatan_karyawan + " Data retrived",status:200, data: rows })
         }
     })
 })

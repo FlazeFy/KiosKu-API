@@ -13,7 +13,34 @@ router.get('/getAllBarang', (req, res) => {
         if (error) {
             res.status(500).send(error)
         } else {
-            res.status(200).json({ msg: "Data retrived", status: 200, data: rows })
+            res.status(200).json({ msg: rows.length + " Data retrived", status: 200, data: rows })
+        }
+    })
+})
+
+//Get barang data by id & nama barang
+router.get('/getBarang/:id/:nama_barang', (req, res) => {
+    const id = req.params.id
+    const nama_barang = req.params.nama_barang
+    
+    connection.query('SELECT * FROM barang WHERE id like ? or nama_barang like ?', ['%' + id + '%', '%' + nama_barang + '%'], (error, rows, fields) => {
+        if (error) {
+            res.status(500).send(error)
+        } else {
+            res.status(200).json({ msg: rows.length + " Data retrived",status:200, data: rows })
+        }
+    })
+})
+
+//Get barang data by kategori barang
+router.get('/getBarangKategori/:kategori_barang', (req, res) => {
+    const kategori_barang = req.params.kategori_barang
+    
+    connection.query('SELECT * FROM barang WHERE kategori_barang = ?', [kategori_barang], (error, rows, fields) => {
+        if (error) {
+            res.status(500).send(error)
+        } else {
+            res.status(200).json({ msg: rows.length + " " + kategori_barang + " Data retrived",status:200, data: rows })
         }
     })
 })
