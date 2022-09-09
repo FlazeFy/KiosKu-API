@@ -70,4 +70,40 @@ router.post('/insertBarang', (req, res) => {
     })
 })
 
+//Update barang
+router.put('/updateBarang/:id', (req, res) => {
+    const id = req.params.id
+    const nama_barang = req.body.nama_barang
+    const kategori_barang = req.body.kategori_barang
+    const harga_stok = req.body.harga_stok
+    const harga_jual = req.body.harga_jual
+    const deskripsi_barang = req.body.deskripsi_barang
+    const stok_barang = req.body.stok_barang
+    const updated_at = new Date()
+
+    connection.query("UPDATE " +
+        "barang SET nama_barang = ?, kategori_barang = ?, harga_stok = ?, harga_jual = ?, deskripsi_barang = ?, stok_barang = ?, updated_at = ? " +
+        "WHERE id = ? ",
+        [nama_barang, kategori_barang, harga_stok, harga_jual, deskripsi_barang, stok_barang, updated_at, id], (error, rows, fields) => {
+        if (error) {
+            res.status(400).json({ msg: "Error :" + error })
+        } else {
+            res.status(200).json({ msg: "Update Success",status:200, data: rows })
+        }
+    })
+})
+
+//Delete barang
+router.delete('/deleteBarang/:id', (req, res) => {
+    const id = req.params.id
+    
+    connection.query('DELETE FROM barang WHERE id = ?', [id], (error, rows, fields) => {
+        if (error) {
+            res.status(500).send(error)
+        } else {
+            res.status(200).json({ msg: "Deleted Success",status:200, data: rows })
+        }
+    })
+})
+
 module.exports = router

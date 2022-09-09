@@ -71,4 +71,42 @@ router.post('/insertKaryawan', (req, res) => {
     })
 })
 
+//Update karyawan
+router.put('/updateKaryawan/:id', (req, res) => {
+    const id = req.params.id
+    const nama_karyawan = req.body.nama_karyawan
+    const nama_lengkap_karyawan = req.body.nama_lengkap_karyawan
+    const email_karyawan = req.body.email_karyawan
+    const ponsel_karyawan = req.body.ponsel_karyawan
+    const jabatan_karyawan = req.body.jabatan_karyawan
+    const status_karyawan = req.body.status_karyawan
+    const gaji_karyawan = req.body.gaji_karyawan
+    const karyawan_image_url = req.body.karyawan_image_url
+    const updated_at = new Date()
+
+    connection.query("UPDATE " +
+        "karyawan SET nama_karyawan = ?, nama_lengkap_karyawan = ?, email_karyawan = ?, ponsel_karyawan = ?, jabatan_karyawan = ?, status_karyawan = ?, gaji_karyawan = ?, karyawan_image_url = ?, updated_at = ? " +
+        "WHERE id = ? ",
+        [nama_karyawan, nama_lengkap_karyawan, email_karyawan, ponsel_karyawan, jabatan_karyawan, status_karyawan, gaji_karyawan, karyawan_image_url, updated_at, id], (error, rows, fields) => {
+        if (error) {
+            res.status(400).json({ msg: "Error :" + error })
+        } else {
+            res.status(200).json({ msg: "Update Success",status:200, data: rows })
+        }
+    })
+})
+
+//Delete karyawan
+router.delete('/deleteKaryawan/:id', (req, res) => {
+    const id = req.params.id
+    
+    connection.query('DELETE FROM karyawan WHERE id = ?', [id], (error, rows, fields) => {
+        if (error) {
+            res.status(500).send(error)
+        } else {
+            res.status(200).json({ msg: "Deleted Success",status:200, data: rows })
+        }
+    })
+})
+
 module.exports = router
