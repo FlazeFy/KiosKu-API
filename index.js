@@ -5,6 +5,7 @@ const cors = require('cors')
 const router_karyawan = require('./router/karyawan')
 const router_barang = require('./router/barang')
 const router_absensi = require('./router/absensi')
+const router_kegiatan = require('./router/kegiatan')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -15,6 +16,7 @@ app.use(express.json())
 app.use(router_karyawan)
 app.use(router_barang)
 app.use(router_absensi)
+app.use(router_kegiatan)
 
 app.listen(port, () => {
     console.log('KiosKu API is Running')
